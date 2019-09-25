@@ -10,11 +10,11 @@ Attribute VB_Exposed = True
 
 Private Sub Workbook_Open()
 
-'Protéger
+'ProtÃ©ger
 Windows("Tampon.xlsm").Activate
 ActiveSheet.Protect "spr", userinterfaceonly:=True, AllowFiltering:=True, AllowUsingPivotTables:=True
 
-'Creer les filtres de la première ligne
+'Creer les filtres de la premiÃ¨re ligne
 'Rows("1:1").AutoFilter
 'Workbooks("Tampon.xlsm").Save
 'Worksheets("Pret").ScrollArea = "A1:N200"

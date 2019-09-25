@@ -6,7 +6,7 @@ FichOuvert = Not Workbooks(F) Is Nothing
 
 End Function
 
-'Mettre ‡ jour les feuils "BDD" des fichiers "Bon_pret.xlsm" et "Retour_pret.xlsm"
+'Mettre √† jour les feuils "BDD" des fichiers "Bon_pret.xlsm" et "Retour_pret.xlsm"
 Sub MAJ()
 
 'Calculer le temps de calcul
@@ -28,14 +28,14 @@ chemin = Application.ActiveWorkbook.Path
 Application.ScreenUpdating = False
 
 '_____________________________________________________________________________________________________________'
-'                    'Mettre ‡ jour la base des donÈes de "Bon_pret.xlsm"
+'                    'Mettre √† jour la base des don√©es de "Bon_pret.xlsm"
 
 If Not (FichOuvert(bonPret)) Then
     Workbooks.Open Filename:=chemin & "\" & bonPret
 End If
 
 If Workbooks(bonPret).ReadOnly = True Then
-    MsgBox ("Attention le fichier 'Bon_pret.xlsm' est en lecture seule, merci de fermer le fichier sur le poste concernÈ avant de continuer, car on va faire des modifications dans celui-ci")
+    MsgBox ("Attention le fichier 'Bon_pret.xlsm' est en lecture seule, merci de fermer le fichier sur le poste concern√© avant de continuer, car on va faire des modifications dans celui-ci")
     Exit Sub
 End If
 
@@ -75,14 +75,14 @@ Range("A1").Select
 Application.CutCopyMode = False 'vider le presse-papier
 
 '_____________________________________________________________________________________________________________'
-'                    'Mettre ‡ jour la base des donÈes de "Retour_pret.xlsm"
+'                    'Mettre √† jour la base des don√©es de "Retour_pret.xlsm"
 
 If Not (FichOuvert(retourPret)) Then
     Workbooks.Open Filename:=chemin & "\" & retourPret
 End If
 
 If Workbooks(retourPret).ReadOnly = True Then
-    MsgBox ("Attention le fichier 'Retour_pret.xlsm' est en lecture seule, merci de fermer le fichier sur le poste concernÈ avant de continuer, car on va faire des modifications dans celui-ci")
+    MsgBox ("Attention le fichier 'Retour_pret.xlsm' est en lecture seule, merci de fermer le fichier sur le poste concern√© avant de continuer, car on va faire des modifications dans celui-ci")
     Exit Sub
 End If
 
@@ -125,22 +125,22 @@ Application.CutCopyMode = False 'vider le presse-papier
 
 Workbooks(bdd).Save
 
-'Afficher les opÈrations de la macro
+'Afficher les op√©rations de la macro
 Application.ScreenUpdating = True
 
 'Worksheets("BDD").Protect userinterfaceonly:=True, Password:="spr"
 
 seconds = Round(Timer - start, 2)
 
-MsgBox ("Les bases des donnÈes des fichiers 'Bon_pret' et 'Retour_pret' ont ÈtÈ actualisÈs!")
-MsgBox "Temps d'exÈcution : " & seconds & " secondes"
+MsgBox ("Les bases des donn√©es des fichiers 'Bon_pret' et 'Retour_pret' ont √©t√© actualis√©s!")
+MsgBox "Temps d'ex√©cution : " & seconds & " secondes"
 
 End Sub
 
 'Supprimer l'enregistrement des modifications lors de la fermeture
 Sub Auto_Close()
 
-ThisWorkbook.Saved = True 'Excel rÈpond comme si le classeur a dÈj‡ ÈtÈ enregistrÈ
+ThisWorkbook.Saved = True 'Excel r√©pond comme si le classeur a d√©j√† √©t√© enregistr√©
 
 End Sub
 

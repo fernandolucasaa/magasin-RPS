@@ -23,7 +23,7 @@ End Sub
 
 Private Sub Workbook_Open()
 
-'Protéger
+'ProtÃ©ger
 Worksheets("Bon_pret").Protect UserInterfaceOnly:=True, Password:="spr"
 Worksheets("Bon_pret").ScrollArea = "A1:E16"
 

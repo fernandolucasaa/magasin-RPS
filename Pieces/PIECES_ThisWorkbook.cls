@@ -9,11 +9,11 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 Private Sub Workbook_Open()
 
-'Protéger
+'ProtÃ©ger
 Worksheets("resultat").Protect userinterfaceonly:=True, Password:="spr", AllowFiltering:=True, AllowUsingPivotTables:=True
 Worksheets("resultat").ScrollArea = "A1:F20000"
 
-'Creer les filtres de la première ligne
+'Creer les filtres de la premiÃ¨re ligne
 'Rows("1:1").Select
 'Selection.AutoFilter
 'Range("A1").Select

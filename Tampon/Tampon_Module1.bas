@@ -6,7 +6,7 @@ FichOuvert = Not Workbooks(F) Is Nothing
 
 End Function
 
-'Retourner à l'accueil
+'Retourner Ã  l'accueil
 Sub Accueil()
 
 Worksheets("Pret").Protect userinterfaceonly:=True, Password:="spr", AllowFiltering:=True, AllowSorting:=True
@@ -24,7 +24,7 @@ If Not (FichOuvert(pret)) Then
     Workbooks.Open Filename:=chemin & "\" & pret
 End If
 
-''Creer les filtres de la première ligne
+''Creer les filtres de la premiÃ¨re ligne
 'Rows("1:1").Select
 'Selection.AutoFilter
 'Range("A1").Select
@@ -37,7 +37,7 @@ Workbooks(tampon).Close SaveChanges:=False
 
 End Sub
 
-'Faire le retour de prêt en utilisant le fichier "Retour_pret.xslm"
+'Faire le retour de prÃªt en utilisant le fichier "Retour_pret.xslm"
 Sub retourPret()
 
 Dim r As Integer
@@ -58,12 +58,12 @@ If MsgBox("Voulez-vous faire le retour du CMS " & Sheets("Pret").Range("C" & r).
         Workbooks.Open Filename:=chemin & "\" & retourPret
     End If
     
-    'Préremplir les informations
+    'PrÃ©remplir les informations
     Workbooks(retourPret).Sheets("Retour_pret").Range("C3").Value = Workbooks(tampon).Sheets("Pret").Range("C" & r).Value 'Le CMS
-    Workbooks(retourPret).Sheets("Retour_pret").Range("C4").Value = Workbooks(tampon).Sheets("Pret").Range("G" & r).Value 'La quantité
+    Workbooks(retourPret).Sheets("Retour_pret").Range("C4").Value = Workbooks(tampon).Sheets("Pret").Range("G" & r).Value 'La quantitÃ©
     Workbooks(retourPret).Sheets("Retour_pret").Range("E6").Value = Workbooks(tampon).Sheets("Pret").Range("J" & r).Value 'L'emprunteur
         
-    Workbooks(retourPret).Sheets("Retour_pret").Range("C8").Select 'Pré selection de la case
+    Workbooks(retourPret).Sheets("Retour_pret").Range("C8").Select 'PrÃ© selection de la case
     
     'Fermer
     Windows(retourPret).Activate
@@ -77,6 +77,6 @@ End Sub
 'Supprimer l'enregistrement des modifications lors de la fermeture
 Sub Auto_Close()
 
-ThisWorkbook.Saved = True 'Excel répond comme si le classeur a déjà été enregistré
+ThisWorkbook.Saved = True 'Excel rÃ©pond comme si le classeur a dÃ©jÃ  Ã©tÃ© enregistrÃ©
 
 End Sub

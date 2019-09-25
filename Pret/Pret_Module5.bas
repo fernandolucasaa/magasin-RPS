@@ -9,7 +9,7 @@ End Function
 'Supprimer l'enregistrement des modifications lors de la fermeture
 Sub Auto_Close()
 
-ThisWorkbook.Saved = True 'Excel rÈpond comme si le classeur a dÈj‡ ÈtÈ enregistrÈ
+ThisWorkbook.Saved = True 'Excel r√©pond comme si le classeur a d√©j√† √©t√© enregistr√©
 
 End Sub
 

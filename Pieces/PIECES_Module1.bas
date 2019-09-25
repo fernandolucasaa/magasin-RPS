@@ -13,7 +13,7 @@ FichOuvert = Not Workbooks(F) Is Nothing
 
 End Function
 
-'Retourner à l'accueil
+'Retourner Ã  l'accueil
 Sub Accueil()
 
 Worksheets("resultat").Protect userinterfaceonly:=True, Password:="spr", AllowFiltering:=True, AllowUsingPivotTables:=True
@@ -31,7 +31,7 @@ If Not (FichOuvert(pret)) Then
     Workbooks.Open Filename:=chemin & "\" & pret
 End If
 
-''Creer les filtres de la première ligne
+''Creer les filtres de la premiÃ¨re ligne
 'Rows("1:1").Select
 'Selection.AutoFilter
 Range("A1").Select
@@ -42,12 +42,12 @@ Workbooks(pieces).Close SaveChanges:=False
 
 End Sub
 
-'Mise à jour des donnée en utilisant le fichier "PIECE GENERIQUE.xlsx"
+'Mise Ã  jour des donnÃ©e en utilisant le fichier "PIECE GENERIQUE.xlsx"
 Sub MAJ()
 
 Worksheets("resultat").Protect userinterfaceonly:=True, Password:="spr", AllowFiltering:=True, AllowUsingPivotTables:=True
 
-'Afficher les opérations de la macro
+'Afficher les opÃ©rations de la macro
 Application.ScreenUpdating = False
 
 'Variables pour les fichiers
@@ -63,7 +63,7 @@ If Not (FichOuvert(piecesGenerique)) Then
     Workbooks.Open Filename:=chemin & "\" & piecesGenerique
 End If
 
-'Calculer le nombre des lignes utilisées
+'Calculer le nombre des lignes utilisÃ©es
 Dim derlignes As Long
 
 Windows(piecesGenerique).Activate
@@ -100,14 +100,14 @@ Windows(pieces).Activate
 Range("A1").Select
 Workbooks(pieces).Save
 
-MsgBox "Le fichier 'PIECES.xlsm' a été mis à jour en utilisant le fichier 'PIECES GENERIQUE.xlsx'"
+MsgBox "Le fichier 'PIECES.xlsm' a Ã©tÃ© mis Ã  jour en utilisant le fichier 'PIECES GENERIQUE.xlsx'"
     
-'Afficher les opérations de la macro
+'Afficher les opÃ©rations de la macro
 Application.ScreenUpdating = True
 
 End Sub
 
-'Faire un bon de prêt
+'Faire un bon de prÃªt
 Sub SortiePieces()
 
 Worksheets("resultat").Protect userinterfaceonly:=True, Password:="spr", AllowFiltering:=True, AllowUsingPivotTables:=True
@@ -130,7 +130,7 @@ If MsgBox("Voullez vous faire une sortie du CMS " & Sheets("resultat").Range("A"
         Workbooks.Open Filename:=chemin & "\" & bonPret
     End If
     
-    'Préremplir les informations (CMS et n° série)
+    'PrÃ©remplir les informations (CMS et nÂ° sÃ©rie)
     Workbooks(bonPret).Sheets("Bon_pret").Range("C3").Value = Workbooks(pieces).Sheets("resultat").Range("A" & r).Value 'Le CMS
     
     Windows(bonPret).Activate
@@ -144,6 +144,6 @@ End Sub
 'Supprimer l'enregistrement des modifications lors de la fermeture
 Sub Auto_Close()
 
-ThisWorkbook.Saved = True 'Excel répond comme si le classeur a déjà été enregistré
+ThisWorkbook.Saved = True 'Excel rÃ©pond comme si le classeur a dÃ©jÃ  Ã©tÃ© enregistrÃ©
 
 End Sub

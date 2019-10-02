@@ -13,7 +13,7 @@ FichOuvert = Not Workbooks(F) Is Nothing
     
 End Function
 
-'Enregistrer le bon de prêt
+'Enregistrer le bon de prÃªt
 Sub Nouveau_bon()
 
 'Calculer le temps de calcul
@@ -34,34 +34,34 @@ Windows(bonPret).Activate
 chemin = Application.ActiveWorkbook.Path
 
 '____________________________________________________________________________________________________________________'
-            'Tester l'entrée des données
+            'Tester l'entrÃ©e des donnÃ©es
                     
-'Tester si les cellules C3 (CM) et C4 (quantité) sont vides
+'Tester si les cellules C3 (CM) et C4 (quantitÃ©) sont vides
 If Range("C3") = "" Or Range("C4") = "" Then
-    MsgBox ("Veuillez remplir le numéro du CMS, la quantité empruntée, le nom de l'emprunteur et l'observation")
+    MsgBox ("Veuillez remplir le numÃ©ro du CMS, la quantitÃ© empruntÃ©e, le nom de l'emprunteur et l'observation")
     Exit Sub
 End If
 
-'Tester si la cellule C3 (CM) est un nombre, qu'il est composé de 10 chiffres et qu'il existe
+'Tester si la cellule C3 (CM) est un nombre, qu'il est composÃ© de 10 chiffres et qu'il existe
 Dim CMS As String
 CMS = Range("C3").Value
     
 If Not IsNumeric(CMS) Then
-    MsgBox ("Veuillez entrer un CMS composé de 10 chiffres")
+    MsgBox ("Veuillez entrer un CMS composÃ© de 10 chiffres")
     Exit Sub
 Else
     Dim longueurCMS As Integer
-    longueurCMS = Len(Range("C3").Value) 'Comptage des caractères
+    longueurCMS = Len(Range("C3").Value) 'Comptage des caractÃ¨res
             
-    'Tester si la cellule contient 10 caractères
+    'Tester si la cellule contient 10 caractÃ¨res
     If longueurCMS <> 10 Then
-        MsgBox ("Veuillez entrer un CMS composé de 10 chiffres")
+        MsgBox ("Veuillez entrer un CMS composÃ© de 10 chiffres")
         Exit Sub
     End If
     
     'Tester si le CMS existe
     If IsError(Range("E3")) Then
-        MsgBox ("Le CMS indiqué n'existe pas")
+        MsgBox ("Le CMS indiquÃ© n'existe pas")
         ' ? Range("E3") = "=IF(RC[-2]="""","""",VLOOKUP(RC[-2],Piece!C[-4]:C[-2],2,FALSE))" 'RC[-2] -> CM
         ' ? Range("C3").Select
         ' ? Application.CutCopyMode = False
@@ -69,27 +69,27 @@ Else
     End If
 End If
 
-'Tester si la cellule C4 (quantité) est un nombre
+'Tester si la cellule C4 (quantitÃ©) est un nombre
 Dim Quantite As Long
 Quantite = Range("C4").Value
 
 If Not IsNumeric(Quantite) Then
-    MsgBox ("Veuillez entrer le nombre de pièce à sortir")
+    MsgBox ("Veuillez entrer le nombre de piÃ¨ce Ã  sortir")
     Exit Sub
 End If
 
-'Tester si le emprunteur est dans la base des données
+'Tester si le emprunteur est dans la base des donnÃ©es
 If IsError(Range("E5")) And Range("E8").Value = "" Then
     MsgBox ("Le nom rempli n'est pas dans la liste. Verifiez le nome et/ou indiquer votre nom et le nom de votre responsable dans la case Commentaires.")
     Exit Sub
 End If
 
 '___________________________________________________________________________________________________________________'
-                'Message pour valider la création du bon de prêt'
+                'Message pour valider la crÃ©ation du bon de prÃªt'
 
-If MsgBox("Etes-vous sur de vouloir créer le bon de prêt ?", vbYesNo, "Demande de confirmation") = vbYes Then
+If MsgBox("Etes-vous sur de vouloir crÃ©er le bon de prÃªt ?", vbYesNo, "Demande de confirmation") = vbYes Then
 
-    'Masquer les opérations de la macro
+    'Masquer les opÃ©rations de la macro
     Application.ScreenUpdating = False
                         
     Range("C3").Select 'Active la cellule C3 (CMS)
@@ -98,7 +98,7 @@ If MsgBox("Etes-vous sur de vouloir créer le bon de prêt ?", vbYesNo, "Demande d
     '____________________________________________________________________________________________________________________'
                 'Copier les informations du fichier "Bon_pret.xlms" dans le fichier "Tampon.xlms"
     
-    'Tester si le fichier "Tampon" est ouvert et l'ouvrir si nécessaire
+    'Tester si le fichier "Tampon" est ouvert et l'ouvrir si nÃ©cessaire
     If Not (FichOuvert(tampon)) Then
         Workbooks.Open Filename:=chemin & "\" & tampon
     End If
@@ -118,34 +118,34 @@ If MsgBox("Etes-vous sur de vouloir créer le bon de prêt ?", vbYesNo, "Demande d
     Range("C2").Select
     Selection.NumberFormat = "0" 'Change le type de cellule en "nombre"
     
-    'Copie de la date (B2), du CMS (C3), de la quantité (C4), du responsable de l'emprunteur (C6), du numéro de série (C5),
-    'du nom de l'emprunteur (E6), de la destination de la pièce (Unité) (E5), du numéro de téléphone (E7) , du type de prêt (C8)
+    'Copie de la date (B2), du CMS (C3), de la quantitÃ© (C4), du responsable de l'emprunteur (C6), du numÃ©ro de sÃ©rie (C5),
+    'du nom de l'emprunteur (E6), de la destination de la piÃ¨ce (UnitÃ©) (E5), du numÃ©ro de tÃ©lÃ©phone (E7) , du type de prÃªt (C8)
     'et du commentaire (E8) dans le fichier "Tampon" dans l'onglet "Pret"
     
     Workbooks(tampon).Sheets("Pret").Cells(2, 2).Value = Workbooks(bonPret).Sheets("Bon_pret").Cells(2, 2) 'date
     Workbooks(tampon).Sheets("Pret").Cells(2, 3).Value = Workbooks(bonPret).Sheets("Bon_pret").Cells(3, 3) 'CMS
-    Workbooks(tampon).Sheets("Pret").Cells(2, 7).Value = Workbooks(bonPret).Sheets("Bon_pret").Cells(4, 3) 'quantité
+    Workbooks(tampon).Sheets("Pret").Cells(2, 7).Value = Workbooks(bonPret).Sheets("Bon_pret").Cells(4, 3) 'quantitÃ©
     Workbooks(tampon).Sheets("Pret").Cells(2, 9).Value = Workbooks(bonPret).Sheets("Bon_pret").Cells(6, 3) 'responsable de l'emprunteur
-    Workbooks(tampon).Sheets("Pret").Cells(2, 5).Value = Workbooks(bonPret).Sheets("Bon_pret").Cells(5, 3) 'numéro de série
+    Workbooks(tampon).Sheets("Pret").Cells(2, 5).Value = Workbooks(bonPret).Sheets("Bon_pret").Cells(5, 3) 'numÃ©ro de sÃ©rie
     Workbooks(tampon).Sheets("Pret").Cells(2, 10).Value = Workbooks(bonPret).Sheets("Bon_pret").Cells(6, 5) 'nom de l'emprunteur
-    Workbooks(tampon).Sheets("Pret").Cells(2, 8).Value = Workbooks(bonPret).Sheets("Bon_pret").Cells(5, 5) 'unité
-    Workbooks(tampon).Sheets("Pret").Cells(2, 11).Value = Workbooks(bonPret).Sheets("Bon_pret").Cells(7, 5) 'numéro de téléphone
-    Workbooks(tampon).Sheets("Pret").Cells(2, 12).Value = Workbooks(bonPret).Sheets("Bon_pret").Cells(8, 3) 'type de prêt
+    Workbooks(tampon).Sheets("Pret").Cells(2, 8).Value = Workbooks(bonPret).Sheets("Bon_pret").Cells(5, 5) 'unitÃ©
+    Workbooks(tampon).Sheets("Pret").Cells(2, 11).Value = Workbooks(bonPret).Sheets("Bon_pret").Cells(7, 5) 'numÃ©ro de tÃ©lÃ©phone
+    Workbooks(tampon).Sheets("Pret").Cells(2, 12).Value = Workbooks(bonPret).Sheets("Bon_pret").Cells(8, 3) 'type de prÃªt
     Workbooks(tampon).Sheets("Pret").Cells(2, 24).Value = Workbooks(bonPret).Sheets("Bon_pret").Cells(8, 5) 'commentaire
 
-    'Remplir la cellule D2 (Désignation)
+    'Remplir la cellule D2 (DÃ©signation)
     Workbooks(tampon).Activate
     Sheets("Pret").Select
-    'Recherche V de la valeur de la cellule C2 (CMS) pour la cellule D2 (Désignation) dans l'onglet "Piece" du fichier "Tampon.xlsm"
+    'Recherche V de la valeur de la cellule C2 (CMS) pour la cellule D2 (DÃ©signation) dans l'onglet "Piece" du fichier "Tampon.xlsm"
     Range("D2").FormulaR1C1 = "=VLOOKUP(RC[-1],Piece!C[-3]:C[2],2,FALSE)"
     
-    'Mettre les commentaires en évidence
+    'Mettre les commentaires en Ã©vidence
     If Workbooks(tampon).Sheets("Pret").Range("X2").Value <> "" Then
         Range("X2").Interior.Color = RGB(255, 0, 0)
     End If
     
     '____________________________________________________________________________________________________________________'
-                'Mise à jour du fichier "Tampon.xlsm" en utilisant les fichiers "DISPOCOCKPIT GENERIQUE.xlsx" et "PIECES.xlsm"
+                'Mise Ã  jour du fichier "Tampon.xlsm" en utilisant les fichiers "DISPOCOCKPIT GENERIQUE.xlsx" et "PIECES.xlsm"
     
     If Not (FichOuvert(dispocockpitGererique)) Then
         Workbooks.Open Filename:=chemin & "\" & dispocockpitGererique
@@ -156,7 +156,7 @@ If MsgBox("Etes-vous sur de vouloir créer le bon de prêt ?", vbYesNo, "Demande d
     End If
     
     '____________________________________________________________________________________________________________________'
-                'Mise à jour des données dans le fichier de création de pret ("Tampon.xlsm")
+                'Mise Ã  jour des donnÃ©es dans le fichier de crÃ©ation de pret ("Tampon.xlsm")
 
     'Remplir la cellule F2 (Empla.)
     Workbooks(tampon).Activate
@@ -164,11 +164,11 @@ If MsgBox("Etes-vous sur de vouloir créer le bon de prêt ?", vbYesNo, "Demande d
     'Recherche V de la valeur de la cellule C2 (CMS) pour la cellule F2 (Empla.) dans l'onglet "resultat" du fichier "PIECES.xlsm"
     Range("F2").FormulaR1C1 = "=VLOOKUP(RC[-3],[PIECES.xlsm]resultat!C1:C6,4,FALSE)"
     
-    'Sélectionne la cellule P2 (Valeur Stock) dans le fichier
+    'SÃ©lectionne la cellule P2 (Valeur Stock) dans le fichier
     Range("P2").FormulaR1C1 = _
         "=VLOOKUP(RC[-13],'[DISPOCOCKPIT GENERIQUE.xlsx]MPR PILOTAGE'!A:P,13,FALSE)"
     
-    'Sélectionne la cellule Q2 (Quant. en stock SAP) dans le fichier
+    'SÃ©lectionne la cellule Q2 (Quant. en stock SAP) dans le fichier
     Range("Q2").FormulaR1C1 = _
         "=VLOOKUP(RC[-14],'[DISPOCOCKPIT GENERIQUE.xlsx]MPR PILOTAGE'!C1:C16,12,FALSE)"
     
@@ -185,7 +185,7 @@ If MsgBox("Etes-vous sur de vouloir créer le bon de prêt ?", vbYesNo, "Demande d
     'Active la feuille "Pret"
     Sheets("Pret").Select
     
-    'Sélectionne la cellule P2 (Valuer Stock)
+    'SÃ©lectionne la cellule P2 (Valuer Stock)
     Range("P2").FormulaR1C1 = _
         "=VLOOKUP(RC[-13],'[DISPOCOCKPIT GENERIQUE.xlsx]MPR PILOTAGE'!C1:C16,5,FALSE)"
     
@@ -205,20 +205,20 @@ If MsgBox("Etes-vous sur de vouloir créer le bon de prêt ?", vbYesNo, "Demande d
     'Delta jour
     Range("O2").FormulaR1C1 = "=IF(RC[-2]=0,TODAY()-RC[-13],RC[-2]-RC[-13])"
     Range("S2").FormulaR1C1 = "=IF(RC[-6]<30,1,0)"
-    'stock deporté
+    'stock deportÃ©
     Range("T2").FormulaR1C1 = "=IF(AND(RC[-7]<60,RC[-7]>29),1,0)"
     Range("U2").FormulaR1C1 = "=IF(RC[-8]>60,1,0)"
     Range("V2").FormulaR1C1 = "=IF(AND(RC[-9]<60,RC[-9]>29),1,0)"
     Range("W2").FormulaR1C1 = "=+IF(RC[-12]>0,0,1)"
     'Q. en stock physique
-    Range("R2").FormulaR1C1 = "=RC[-1]-RC[-11]"  'Q. en stock SAP - Q.prélevée
+    Range("R2").FormulaR1C1 = "=RC[-1]-RC[-11]"  'Q. en stock SAP - Q.prÃ©levÃ©e
     
     Rows("2:2").Select
     Selection.Font.Bold = False
     Selection.EntireRow.AutoFit
     
     '____________________________________________________________________________________________________________________'
-                'Fin macro de la copie des informations pour la création de prêt
+                'Fin macro de la copie des informations pour la crÃ©ation de prÃªt
     
     'Fermeture des fichiers
     Windows(dispocockpitGererique).Activate
@@ -227,7 +227,7 @@ If MsgBox("Etes-vous sur de vouloir créer le bon de prêt ?", vbYesNo, "Demande d
     Workbooks(pieces).Close SaveChanges:=False
 
     '____________________________________________________________________________________________________________________'
-                'Début macro pour faire le calcul du nouveau numéro de ligne
+                'DÃ©but macro pour faire le calcul du nouveau numÃ©ro de ligne
 
     If Not (FichOuvert(numeroPret)) Then
         Workbooks.Open Filename:=chemin & "\Numero_pret\" & numeroPret
@@ -245,10 +245,10 @@ If MsgBox("Etes-vous sur de vouloir créer le bon de prêt ?", vbYesNo, "Demande d
     Worksheets("Pret").Select
     Range("A2").Value = numero
     
-    'fin macro nouveau numéro de ligne
+    'fin macro nouveau numÃ©ro de ligne
     
     '____________________________________________________________________________________________________________________'
-                'Fin du test de si le technicien veut créer un bon de prêt'
+                'Fin du test de si le technicien veut crÃ©er un bon de prÃªt'
 
 Else
 
@@ -289,15 +289,15 @@ Workbooks(tampon).Close SaveChanges:=True
 
 '____________________________________________________________________________________________________________________'
 
-'Afficher les opérations de la macro
+'Afficher les opÃ©rations de la macro
 Application.ScreenUpdating = True
 
 'Temps d'execution
 'seconds = Round(Timer - start, 2)
-'MsgBox "Temps d'exécution : " & seconds & " secondes"
+'MsgBox "Temps d'exÃ©cution : " & seconds & " secondes"
 
-'Message box pour confirmer la création du bon de prêt
-MsgBox ("Le bon de prêt a bien été enregistré.")
+'Message box pour confirmer la crÃ©ation du bon de prÃªt
+MsgBox ("Le bon de prÃªt a bien Ã©tÃ© enregistrÃ©.")
 
 'Fermer le fichier "Bon_pret.xlsm" sans sauvegarder
 Workbooks(bonPret).Activate
@@ -308,7 +308,7 @@ Range("C3").Select
 Worksheets("Bon_pret").Protect UserInterfaceOnly:=True, Password:="spr", AllowFiltering:=True
 'Workbooks("Bon_pret.xlsm").Close SaveChanges:=False
 
-'Revenir à l'accueil excel
+'Revenir Ã  l'accueil excel
 If Not (FichOuvert(pret)) Then
     Workbooks.Open Filename:=chemin & "\" & pret
 End If

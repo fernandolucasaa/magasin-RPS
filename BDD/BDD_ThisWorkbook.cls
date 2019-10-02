@@ -9,7 +9,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 Private Sub Workbook_Open() 'Event
 
-'UserInterfaceOnly = True permet d'exécuter des macros et protége seulement les modifications opéréees par l'utilisateur
+'UserInterfaceOnly = True permet d'exÃ©cuter des macros et protÃ©ge seulement les modifications opÃ©rÃ©ees par l'utilisateur
 Worksheets("BDD").Protect userinterfaceonly:=True, Password:="spr"
 
 End Sub

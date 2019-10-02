@@ -1,5 +1,5 @@
 Attribute VB_Name = "Module1"
-'Retourner ‡ l'accueil
+'Retourner √† l'accueil
 Sub Accueil()
 
 'Variables pour les fichiers
@@ -11,7 +11,7 @@ pret = "pret.xlsm"
 Windows(retourPret).Activate
 chemin = Application.ActiveWorkbook.Path
 
-'Effacer les donnÈes des cellules
+'Effacer les donn√©es des cellules
 Windows(retourPret).Activate
 Range("C3,C4,C8,E6").Select
 Selection.ClearContents
@@ -30,7 +30,7 @@ End Sub
 'Supprimer l'enregistrement des modifications lors de la fermeture
 Sub Auto_Close()
 
-ThisWorkbook.Saved = True 'Excel rÈpond comme si le classeur a dÈj‡ ÈtÈ enregistrÈ
+ThisWorkbook.Saved = True 'Excel r√©pond comme si le classeur a d√©j√† √©t√© enregistr√©
 'Call Accueil
 
 End Sub

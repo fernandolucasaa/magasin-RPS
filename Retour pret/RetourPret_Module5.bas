@@ -13,10 +13,10 @@ FichOuvert = Not Workbooks(F) Is Nothing
 
 End Function
 
-'Faire le retour du prêt
+'Faire le retour du prÃªt
 Sub Retour_pret()
 
-'déclaration des variables
+'dÃ©claration des variables
 Dim Trouve As Range, PlageDeRecherche As Range, NumLigne As Integer, numLigne2 As Integer
 Dim Valeur_Cherchee As String, AdresseTrouvee As String
 Dim derligne_tableau As Long
@@ -37,12 +37,12 @@ Debut:
     Fichier_Piece = "PIECES GENERIQUE.xlsx"
 
     '____________________________________________________________________________________________________________________'
-                'Tester l'entrée des données
+                'Tester l'entrÃ©e des donnÃ©es
                     
-    'Tester si les cellules C3 (CM) et C4 (quantité) sont vides
+    'Tester si les cellules C3 (CM) et C4 (quantitÃ©) sont vides
     'Or Range("C8") = "" Or Range("E6") = ""'
     If Range("C3") = "" Or Range("C4") = "" Then
-        MsgBox ("Veuillez remplir le numéro du CMS, la quantité empruntée, le nom de l'emprunteur et l'observation")
+        MsgBox ("Veuillez remplir le numÃ©ro du CMS, la quantitÃ© empruntÃ©e, le nom de l'emprunteur et l'observation")
         '? Range("E3").Select
         '? Range("E3").Copy
         '? Range("E3").Select
@@ -56,22 +56,22 @@ Debut:
     Else
     End If
    
-    'Tester si la cellule C3 (CMS) est un nombre et qu'il est composé de 10 chiffres
+    'Tester si la cellule C3 (CMS) est un nombre et qu'il est composÃ© de 10 chiffres
     Dim CMS As String
     CMS = Range("C3").Value
     If Not IsNumeric(CMS) Then
-        MsgBox ("Veuillez entrer un CMS composé de 10 chiffres")
+        MsgBox ("Veuillez entrer un CMS composÃ© de 10 chiffres")
         Worksheets("Retour_pret").Protect userinterfaceonly:=True, Password:="spr"
         Exit Sub
     Else
-        'Définition de la variable
+        'DÃ©finition de la variable
         Dim longueurCMS As Integer
-        'Comptage des caractères dans la cellule C3
+        'Comptage des caractÃ¨res dans la cellule C3
         longueurCMS = Len(Range("C3").Value)
         
-        'Test si la cellule contient 10 caractères
+        'Test si la cellule contient 10 caractÃ¨res
         If longueurCMS <> 10 Then
-            MsgBox ("Veuillez entrer un CMS composé de 10 chiffres")
+            MsgBox ("Veuillez entrer un CMS composÃ© de 10 chiffres")
             Worksheets("Retour_pret").Protect userinterfaceonly:=True, Password:="spr"
             Exit Sub
         Else
@@ -79,7 +79,7 @@ Debut:
         
         'Test si le CMS existe
         If IsError(Range("E3")) Then
-                MsgBox ("Le CMS indiqué n'existe pas")
+                MsgBox ("Le CMS indiquÃ© n'existe pas")
                 '? Range("E3") = "=IF(RC[-2]="""","""",VLOOKUP(RC[-2],Piece!C[-4]:C[-2],2,FALSE))"
                 '? Range("C3").Select
                 '? Application.CutCopyMode = False
@@ -90,11 +90,11 @@ Debut:
         End If
     End If
 
-    'Tester si la cellule C4 (quantité) est un nombre
+    'Tester si la cellule C4 (quantitÃ©) est un nombre
     Dim Quantite As String
     Quantite = Range("C4").Value
     If Not IsNumeric(Quantite) Then
-        MsgBox ("Veuillez entrer le nombre de pièce prise")
+        MsgBox ("Veuillez entrer le nombre de piÃ¨ce prise")
         Worksheets("Retour_pret").Protect userinterfaceonly:=True, Password:="spr"
         Exit Sub
     Else
@@ -102,11 +102,11 @@ Debut:
     End If
     
     '____________________________________________________________________________________________________________________'
-                'Message pour valider la création du bon de retour'
+                'Message pour valider la crÃ©ation du bon de retour'
     
-    If MsgBox("Etes-vous sur de vouloir créer le bon de retour de prêt?", vbYesNo, "Demande de confirmation") = vbYes Then
+    If MsgBox("Etes-vous sur de vouloir crÃ©er le bon de retour de prÃªt?", vbYesNo, "Demande de confirmation") = vbYes Then
     
-    'Masquer les opérations de la macro
+    'Masquer les opÃ©rations de la macro
      Application.ScreenUpdating = False
     
     'Variables pour les fichiers
@@ -119,7 +119,7 @@ Debut:
     Windows(retourPret).Activate
     chemin = Application.ActiveWorkbook.Path
     
-    'Tester si le fichier "Tampon" est ouvert et l'ouvrir si nécessaire
+    'Tester si le fichier "Tampon" est ouvert et l'ouvrir si nÃ©cessaire
     If Not (FichOuvert(tampon)) Then
         'Workbooks.Open Filename:="T:\MSP\Boite_aux_lettres\Magasin\Nouvelle version\Tampon.xlsm"
         Workbooks.Open Filename:=chemin & "\" & tampon
@@ -129,9 +129,9 @@ Debut:
     ActiveSheet.Unprotect "spr"
 
     '____________________________________________________________________________________________________________________'
-                'Cette macro permet de rechercher les CMS en doublon déjà sorti en prêt puis fait un filtre sur ceux ci'
+                'Cette macro permet de rechercher les CMS en doublon dÃ©jÃ  sorti en prÃªt puis fait un filtre sur ceux ci'
 
-    'Activer les fenêtres la fenêtre Pret'
+    'Activer les fenÃªtres la fenÃªtre Pret'
     Windows("Retour_pret.xlsm").Activate
     Windows("Tampon.xlsm").Activate
 
@@ -159,10 +159,10 @@ Debut:
     
     Sheets("Pret").Select
     Set PlageDeRecherche = ActiveSheet.Columns(3) 'CMS
-    ActiveSheet.Range("$A$1:$Z$974").AutoFilter Field:=13, Criteria1:="="   'Field -> Date Retour Matériel En Prêt
+    ActiveSheet.Range("$A$1:$Z$974").AutoFilter Field:=13, Criteria1:="="   'Field -> Date Retour MatÃ©riel En PrÃªt
     
     '____________________________________________________________________________________________________________________'
-                'Comptage du nombre de lignes après le filtre'
+                'Comptage du nombre de lignes aprÃ¨s le filtre'
     
     Dim derlignes As Long
     
@@ -178,25 +178,25 @@ Debut:
         Windows("Retour_pret.xlsm").Activate
         Sheets("Retour_Pret").Select
         Range("C3").Select
-        Valeur_Cherchee = Range("C3").Value 'Récupération de la valeur de la cellule C3 dans la feuille "Retour_pret"
+        Valeur_Cherchee = Range("C3").Value 'RÃ©cupÃ©ration de la valeur de la cellule C3 dans la feuille "Retour_pret"
     
         Windows("Tampon.xlsm").Activate
         Sheets("Pret").Select
     
-        'Sélectionne la plage de données dans laquelle on cherche la valeur dans la colonne 3 (CMS) dans la feuille "Pret"
+        'SÃ©lectionne la plage de donnÃ©es dans laquelle on cherche la valeur dans la colonne 3 (CMS) dans la feuille "Pret"
         Set PlageDeRecherche = ActiveSheet.Columns(3)
-        'Méthode find, ici on cherche la valeur exacte (LookAt:=xlWhole)
+        'MÃ©thode find, ici on cherche la valeur exacte (LookAt:=xlWhole)
         Set Trouve = PlageDeRecherche.Cells.Find(what:=Valeur_Cherchee, LookAt:=xlWhole)
        
         'traitement de l'erreur possible : Si on ne trouve rien :
         If Trouve Is Nothing Then
             
-            'ici, traitement pour le cas où la valeur n'est pas trouvée'
-            AdresseTrouvee = Valeur_Cherchee & " n'est pas présent dans " & PlageDeRecherche.Address
+            'ici, traitement pour le cas oÃ¹ la valeur n'est pas trouvÃ©e'
+            AdresseTrouvee = Valeur_Cherchee & " n'est pas prÃ©sent dans " & PlageDeRecherche.Address
         
-        Else 'Si la valeur est trouvée
+        Else 'Si la valeur est trouvÃ©e
             
-            'Remplissage de la Date de Retour de Prêt
+            'Remplissage de la Date de Retour de PrÃªt
             AdresseTrouvee = Trouve.Address
             numLigne2 = Trouve.Row
                 
@@ -207,12 +207,12 @@ Debut:
             Windows("Tampon.xlsm").Activate
             Sheets("Pret").Select
             
-            'Sélectionne la ligne du CMS et la colonne M
+            'SÃ©lectionne la ligne du CMS et la colonne M
             Range("M" & Trouve.Row).Select
             Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
                 :=False, Transpose:=False
 
-            'Remplissage du Type de Retour de Prêt'
+            'Remplissage du Type de Retour de PrÃªt'
             Windows("Retour_pret.xlsm").Activate
             Sheets("Retour_Pret").Select
             Range("C8").Copy 'Type retour
@@ -220,7 +220,7 @@ Debut:
             Windows("Tampon.xlsm").Activate
             Sheets("Pret").Select
                 
-            'Sélectionne la ligne du CMS et la colonne N'
+            'SÃ©lectionne la ligne du CMS et la colonne N'
             Range("N" & Trouve.Row).Select
             Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
                 :=False, Transpose:=False
@@ -236,7 +236,7 @@ Debut:
             Windows("Tampon.xlsm").Activate
             Workbooks("Tampon.xlsm").Close SaveChanges:=True
 
-            'Effacer les données des cellules
+            'Effacer les donnÃ©es des cellules
             Range("C3:C4,E6,C8").Select
             Selection.ClearContents
             Range("C3").Select
@@ -246,7 +246,7 @@ Debut:
             Workbooks("Retour_pret.xlsm").Close SaveChanges:=False
 
             Windows("pret.xlsm").Activate
-            MsgBox ("La demande a bien été prise en compte")
+            MsgBox ("La demande a bien Ã©tÃ© prise en compte")
             Exit Sub
             
         End If
@@ -255,7 +255,7 @@ Debut:
         X = Range("A2:A" & derlignes).SpecialCells(xlCellTypeVisible).Count
     End If
     
-    'Afficher les opérations de la macro
+    'Afficher les opÃ©rations de la macro
     Application.ScreenUpdating = True
 
     '____________________________________________________________________________________________________________________'
@@ -276,7 +276,7 @@ Debut:
         Windows("Tampon.xlsm").Activate
         Workbooks("Tampon.xlsm").Close SaveChanges:=True
 
-        'Effacer les données des cellules
+        'Effacer les donnÃ©es des cellules
         Windows("Retour_pret.xlsm").Activate
         Sheets("Retour_Pret").Select
         Range("C3:C4,E6,C8").Select
@@ -286,7 +286,7 @@ Debut:
         Windows("Retour_pret.xlsm").Activate
         Sheets("Retour_Pret").Select
         
-        MsgBox ("Le CMS que vous ramenez n'a pas été emprunté, veuillez vérifier le numéro du CMS")
+        MsgBox ("Le CMS que vous ramenez n'a pas Ã©tÃ© empruntÃ©, veuillez vÃ©rifier le numÃ©ro du CMS")
         
         Windows("Retour_pret.xlsm").Activate
         Sheets("Retour_Pret").Select
@@ -309,18 +309,18 @@ Debut:
         Windows("Tampon.xlsm").Activate
         Sheets("Pret").Select
         
-        'Sélectionne la plage de données dans laquelle on cherche la valeur dans la colonne 3 (CMS) dans la feuille "Pret"
+        'SÃ©lectionne la plage de donnÃ©es dans laquelle on cherche la valeur dans la colonne 3 (CMS) dans la feuille "Pret"
         Set PlageDeRecherche = ActiveSheet.Columns(3)
-        'Méthode find, ici on cherche la valeur exacte (LookAt:=xlWhole)
+        'MÃ©thode find, ici on cherche la valeur exacte (LookAt:=xlWhole)
         Set Trouve = PlageDeRecherche.Cells.Find(what:=Valeur_Cherchee, LookAt:=xlWhole)
     
         If Trouve Is Nothing Then 'traitement de l'erreur possible : Si on ne trouve rien
             
-            AdresseTrouvee = Valeur_Cherchee & " n'est pas présent dans " & PlageDeRecherche.Address
+            AdresseTrouvee = Valeur_Cherchee & " n'est pas prÃ©sent dans " & PlageDeRecherche.Address
         
-        Else 'Traitement pour le cas où la valeur est trouvée
+        Else 'Traitement pour le cas oÃ¹ la valeur est trouvÃ©e
             
-            'Remplissage de la Date de Retour de Prêt'
+            'Remplissage de la Date de Retour de PrÃªt'
             AdresseTrouvee = Trouve.Address
             numLigne2 = Trouve.Row
             
@@ -331,12 +331,12 @@ Debut:
             Windows("Tampon.xlsm").Activate
             Sheets("Pret").Select
                 
-            'Sélectionne la ligne du CMS et la colonne M (Date de Retour Matéril En PrÊt
+            'SÃ©lectionne la ligne du CMS et la colonne M (Date de Retour MatÃ©ril En PrÃŠt
             Range("M" & Trouve.Row).Select
             Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
                 :=False, Transpose:=False
 
-            'Remplissage du Type de Retour de Prêt'
+            'Remplissage du Type de Retour de PrÃªt'
             Windows("Retour_pret.xlsm").Activate
             Sheets("Retour_Pret").Select
             Range("C8").Copy
@@ -344,7 +344,7 @@ Debut:
             Windows("Tampon.xlsm").Activate
             Sheets("Pret").Select
                 
-            'Sélectionne la ligne du CMS et la colonne N (Type Retour)
+            'SÃ©lectionne la ligne du CMS et la colonne N (Type Retour)
             Range("N" & Trouve.Row).Select
             Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
                 :=False, Transpose:=False
@@ -356,9 +356,9 @@ Debut:
             'Effacer le filtre
             Selection.AutoFilter
             
-            MsgBox ("La demande a bien été prise en compte!")
+            MsgBox ("La demande a bien Ã©tÃ© prise en compte!")
 
-            'Masquer les opérations de la macro
+            'Masquer les opÃ©rations de la macro
             Application.ScreenUpdating = False
                 
             End If
@@ -366,7 +366,7 @@ Debut:
     Else 'S'il y a plusieurs fois le CMS
     
     '____________________________________________________________________________________________________________________'
-                    'Création d'un onglet "Doublon avec les doublons"
+                    'CrÃ©ation d'un onglet "Doublon avec les doublons"
         
         Sheets("Pret").Select
         derligne_tableau = Cells(Rows.Count, 1).End(xlUp).Row 'Calcul de nombre de ligne dans le tableau
@@ -374,14 +374,14 @@ Debut:
         ActiveSheet.Name = "Doublon" 'Renommer l'onglet "Doublon"
         
         Sheets("Pret").Select
-        'Sélectionne les cellules A1 à W dernière ligne'
+        'SÃ©lectionne les cellules A1 Ã  W derniÃ¨re ligne'
         Range("A1" & ":W" & derligne_tableau).Select
         Selection.Copy
     
         Sheets("Doublon").Select
-        'active et colle les données dans la nouvelle feuille'
+        'active et colle les donnÃ©es dans la nouvelle feuille'
         ActiveSheet.Paste
-        'Coller les données'
+        'Coller les donnÃ©es'
         Application.CutCopyMode = False
         
         Windows("Tampon.xlsm").Activate
@@ -389,16 +389,16 @@ Debut:
         Range("A1").Select
         
         '____________________________________________________________________________________________________________________'
-        'Ouverture d'une message box dans laquelle on demande au technicien le numéro de prêt'
-        'ligne = Application.InputBox("Quel est le numéro de prêt?", Type:=1) 'La variable reçoit la valeur entrée dans l'InputBox'
+        'Ouverture d'une message box dans laquelle on demande au technicien le numÃ©ro de prÃªt'
+        'ligne = Application.InputBox("Quel est le numÃ©ro de prÃªt?", Type:=1) 'La variable reÃ§oit la valeur entrÃ©e dans l'InputBox'
         'Active la feuille "Pret"'
         Sheets("Pret").Select
         
-        'Masquer les opérations de la macro
+        'Masquer les opÃ©rations de la macro
         Application.ScreenUpdating = False
         
     '____________________________________________________________________________________________________________________'
-                    'Récuperer les lignes de numéro de prêt'
+                    'RÃ©cuperer les lignes de numÃ©ro de prÃªt'
 
         Windows("Tampon.xlsm").Activate
         Sheets("Pret").Select
@@ -407,44 +407,44 @@ Debut:
         Dim y As Long
         y = X + 1
         
-        'Montrer le combobox "Numéro_de_prêt" (liste déroulante) avec les options
-        Numéro_de_prêt.ComboBox1.List = Worksheets("Doublon").Range("A2:A" & y).Value
-        Numéro_de_prêt.Show
+        'Montrer le combobox "NumÃ©ro_de_prÃªt" (liste dÃ©roulante) avec les options
+        NumÃ©ro_de_prÃªt.ComboBox1.List = Worksheets("Doublon").Range("A2:A" & y).Value
+        NumÃ©ro_de_prÃªt.Show
     
 CommandButton1_Click:
-    'Cacher la fenêtre'
-    Numéro_de_prêt.Hide
+    'Cacher la fenÃªtre'
+    NumÃ©ro_de_prÃªt.Hide
     
-    'Active la fenêtre
+    'Active la fenÃªtre
     Windows("Tampon.xlsm").Activate
     Sheets("Pret").Select
     Range("A1").Select
 
     '____________________________________________________________________________________________________________________'
-                    'tester si la valeur entrée est numérique'
+                    'tester si la valeur entrÃ©e est numÃ©rique'
     If IsNumeric(ligne) Then
 
-        'Enregistre la valeur rentrée dans la message box'
+        'Enregistre la valeur rentrÃ©e dans la message box'
         Range("AA1").Value = ligne
         
-        If ligne <> "" Then 'Si la valeur est différente de ""
+        If ligne <> "" Then 'Si la valeur est diffÃ©rente de ""
 
-            'Recherche le numéro de ligne correspondant au retour de prêt'
+            'Recherche le numÃ©ro de ligne correspondant au retour de prÃªt'
             Valeur_reCherchee = Range("AA1").Value
             
             Sheets("Pret").Select
             
-            'Dans la plage de données avec tous les doublons, on recherche le numéro de ligne de prêt'
+            'Dans la plage de donnÃ©es avec tous les doublons, on recherche le numÃ©ro de ligne de prÃªt'
             Set PlageDeRecherchededonnees = ActiveSheet.Columns(1)
-            'méthode find, ici on cherche la valeur exacte (LookAt:=xlWhole)'
+            'mÃ©thode find, ici on cherche la valeur exacte (LookAt:=xlWhole)'
             Set Trouve = PlageDeRecherchededonnees.Cells.Find(what:=Valeur_reCherchee, LookAt:=xlWhole)
         
             'Traitement de l'erreur possible : Si on ne trouve rien
             If Trouve Is Nothing Then
             
-                AdresseTrouvee = Valeur_reCherchee & " n'est pas présent dans " & PlageDeRecherchededonnees.Address
+                AdresseTrouvee = Valeur_reCherchee & " n'est pas prÃ©sent dans " & PlageDeRecherchededonnees.Address
             
-            Else 'Traitement pour le cas où la valeur est trouvée
+            Else 'Traitement pour le cas oÃ¹ la valeur est trouvÃ©e
                 
                 AdressereTrouvee = Trouve.Address
                 numLigne2 = Trouve.Row
@@ -457,7 +457,7 @@ CommandButton1_Click:
                 Windows("Tampon.xlsm").Activate
                 Sheets("Pret").Select
                 
-                'Sélectionne la ligne du CMS et la colonne M (Date Retour Matériel En Prêt)
+                'SÃ©lectionne la ligne du CMS et la colonne M (Date Retour MatÃ©riel En PrÃªt)
                 Range("M" & Trouve.Row).Select
                 Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
                     :=False, Transpose:=False
@@ -470,7 +470,7 @@ CommandButton1_Click:
                 Windows("Tampon.xlsm").Activate
                 Sheets("Pret").Select
                 
-                'Sélectionne la ligne du CMS et la colonne N (Type Retour)
+                'SÃ©lectionne la ligne du CMS et la colonne N (Type Retour)
                 Range("N" & Trouve.Row).Select
                 Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
                     :=False, Transpose:=False
@@ -493,21 +493,21 @@ CommandButton1_Click:
                 
                 Sheets("Pret").Select
 
-                'Affiche les opérations de la macro'
+                'Affiche les opÃ©rations de la macro'
                 Application.ScreenUpdating = True
 
-                MsgBox ("La demande a bien été prise en compte")
+                MsgBox ("La demande a bien Ã©tÃ© prise en compte")
 
             End If
         
         End If
         
-    End If 'Test si l'entrée est numérique
+    End If 'Test si l'entrÃ©e est numÃ©rique
      
     End If 'Test du nombre de doublons
 
     '____________________________________________________________________________________________________________________'
-                'Fin du test de si le technicien veut créer un bon de prêt'
+                'Fin du test de si le technicien veut crÃ©er un bon de prÃªt'
     Else
     
 CommandButton2_Click:
@@ -527,14 +527,14 @@ CommandButton2_Click:
     
     Workbooks("Tampon.xlsm").Close SaveChanges:=True
 
-    'Effacer les données des cellules
+    'Effacer les donnÃ©es des cellules
     Range("C3:C4,E6,C8").Select
     Selection.ClearContents
     Range("C3").Select
 
     Worksheets("Retour_pret").Protect userinterfaceonly:=True, Password:="spr"
 
-    'Masquer les opérations de la macro
+    'Masquer les opÃ©rations de la macro
     Application.ScreenUpdating = False
 
     ActiveSheet.Protect "spr"
